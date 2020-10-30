@@ -7,8 +7,8 @@ const Body = Matter.Body;
 
 function preload()
 {
-	helicopterIMG=loadImage("helicopter.png")
-	packageIMG=loadImage("package.png")
+	helicopterIMG=loadImage("helicopter.png");
+	packageIMG=loadImage("package.png");
 }
 
 function setup() {
@@ -38,7 +38,6 @@ function setup() {
 	//Create a Ground
 	ground = Bodies.rectangle(width/2, 650, width, 10 , ground_options);
 	World.add(world, ground);
-	keyPressed();
 	Engine.run(engine);
 }
 
@@ -48,18 +47,14 @@ function draw() {
 	packageSprite.x= packageBody.position.x;
 	packageSprite.y= packageBody.position.y;
 	drawSprites();
-	packageSprite.display();
-	helicopterSprite.display();
 	Engine.update(engine);
 }
 
 function keyPressed() {
-	if(keyWentDown("S")) {
+	if(keyCode===UP_ARROW) {
 		//Matter.packageBody.setRestitution = 0.8;
 		//Matter.packageBody.setStatic = false;
-		package_options ={
-			isStatic: false,
-			restitution: 0.8
-		}
+		Matter.Body.setStatic(packageBody,false);
+		Matter.Body.setRestitution(packageBody,0.8)
 	}
 }
