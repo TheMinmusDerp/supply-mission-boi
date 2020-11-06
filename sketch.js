@@ -1,13 +1,13 @@
-var helicopterIMG, helicopterSprite, packageSprite,packageIMG;
-var packageBody,ground;
-var boxside1, boxside2, boxside3;
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 
-function preload()
-{
+var helicopterIMG, helicopterSprite, packageSprite,packageIMG;
+var packageBody,ground;
+var boxside1, boxside2, boxside3;
+
+function preload() {
 	helicopterIMG=loadImage("helicopter.png");
 	packageIMG=loadImage("package.png");
 }
@@ -28,14 +28,16 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 	var package_options={
-		restitution: 0.5,
-		friction: 0.5,
+		'restitution': 0.3,
+		'friction': 0.5,
 		isStatic: true
 	}
-
-	boxside1 = new BoxSide(200,0,200,20);
-	boxside2 = new BoxSide(100,50,20,100);
-	boxside3 = new BoxSide(300,50,20,100);
+	boxside1 = createSprite(400,700,200,20);
+	boxside2 = createSprite(300,650,20,100);
+	boxside3 = createSprite(500,650,20,100);
+	boxside1.shapeColor = "red";
+	boxside2.shapeColor = "red";
+	boxside3.shpaeColor = "red";
 
 	World.add(world, boxside1);
 	World.add(world, boxside2);
@@ -62,14 +64,16 @@ function draw() {
 	boxside1.display();
 	boxside2.display();
 	boxside3.display();
+	//ground.display();
+	//packageBody.display();
 	Engine.update(engine);
 }
 
 function keyPressed() {
 	if(keyCode===UP_ARROW) {
-		//Matter.packageBody.setRestitution = 0.8;
+		//Matter.packageBody.setRestitution = 0.8;	
 		//Matter.packageBody.setStatic = false;
 		Matter.Body.setStatic(packageBody,false);
-		Matter.Body.setRestitution(packageBody,0.8)
+		Matter.Body.setRestitution(packageBody,0.8);
 	}
 }
